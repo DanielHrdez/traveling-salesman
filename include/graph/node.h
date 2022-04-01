@@ -9,16 +9,16 @@
  * 
  */
 
-#pragma once
+#ifndef NODE_H_
+#define NODE_H_
 
-class Node {
-  private:
-    Node* next = nullptr;
-    int weight = 0;
-
-  public:
-    Node(Node* next, int weight);
-    ~Node();
-    Node* getNext();
-    int getWeight();
+/**
+ * @brief Node Struct for check if visited
+ * 
+ */
+struct Node {
+  char* name = "";
+  bool visited = false;
 };
+
+#endif // NODE_H_
