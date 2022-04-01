@@ -21,7 +21,7 @@ class TspBruteForce : public TravelingSalesman {
    * 
    * @param graph Graph of the problem
    */
-  TspBruteForce(Graph graph) : TravelingSalesman(graph) {};
+  TspBruteForce(const Graph graph) : TravelingSalesman(graph) {};
 
   /**
    * @brief Destroy the Brute Force object
@@ -34,7 +34,7 @@ class TspBruteForce : public TravelingSalesman {
    * 
    * @return Edge* 
    */
-  Edge *Solve();
+  Edge *Solve() const override;
 };
 
 #endif // BRUTE_FORCE_H_

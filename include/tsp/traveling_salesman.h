@@ -12,7 +12,7 @@
 #ifndef TRAVELING_SALESMAN_H_
 #define TRAVELING_SALESMAN_H_
 
-#include "graph/graph.h"
+#include "../graph/graph.h"
 
 class TravelingSalesman {
  public:
@@ -21,7 +21,7 @@ class TravelingSalesman {
    * 
    * @param graph Graph of the problem
    */
-  TravelingSalesman(Graph graph) : graph_(graph) {};
+  TravelingSalesman(const Graph graph) : graph_(graph) {};
 
   /**
    * @brief Destroy the Traveling Salesman object
@@ -34,10 +34,10 @@ class TravelingSalesman {
    * 
    * @return Edge* 
    */
-  virtual Edge *Solve() = 0;
+  virtual Edge *Solve() const = 0;
 
  protected:
-  Graph graph_;
+  const Graph graph_;
 };
 
 #endif // TRAVELING_SALESMAN_H_

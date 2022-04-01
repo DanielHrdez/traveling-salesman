@@ -24,8 +24,10 @@ class Graph {
    * @brief Construct a new Graph:: Graph object
    * 
    * @param edges Edges of the graph
+   * @param size Size of the graph
    */
-  Graph(Edge* edges) : edges_(edges) {};
+  Graph(const Edge *edges, const int number_of_edges, const int number_of_nodes)
+    : edges_(edges), number_of_edges_(number_of_edges), number_of_nodes_(number_of_nodes) {};
 
   /**
    * @brief Destroy the Graph object
@@ -35,8 +37,18 @@ class Graph {
     this->edges_ = nullptr;
   };
 
+  const int NumberOfEdges() const {
+    return this->number_of_edges_;
+  };
+
+  const int NumberOfNodes() const {
+    return this->number_of_nodes_;
+  };
+
  private:
-  Edge* edges_;
+  const Edge *edges_;
+  const int number_of_edges_;
+  const int number_of_nodes_;
 };
 
 #endif // GRAPH_H_
