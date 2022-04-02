@@ -21,9 +21,8 @@ class ReadGraph {
   /**
    * @brief Construct a new Read Graph object
    * 
-   * @param filename Name of the file to read
    */
-  ReadGraph(char *filename);
+  ReadGraph() {};
 
   /**
    * @brief Destroy the Read Graph object
@@ -31,6 +30,12 @@ class ReadGraph {
    */
   ~ReadGraph() {};
 
+  /**
+   * @brief Read the graph from file
+   * 
+   * @return Graph* 
+   */
+  Graph Read(char *file_name);
 
  private:
   /**
@@ -44,8 +49,13 @@ class ReadGraph {
     const int kNodesMinusOne = number_of_nodes - 1;
     return kNodesMinusOne + NumberOfEdges(kNodesMinusOne);
   };
-  
-  Graph *graph_;
+
+  int NodeIn(char node_name, Node *nodes, int number_of_nodes) {
+    for (int i = 0; i < number_of_nodes; i++) {
+      if (nodes[i].name == node_name) return i;
+    }
+    return -1;
+  };
 };
 
 #endif // READ_GRAPH_H_

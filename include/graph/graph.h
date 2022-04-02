@@ -26,7 +26,7 @@ class Graph {
    * @param edges Edges of the graph
    * @param size Size of the graph
    */
-  Graph(const Edge *edges, const int number_of_edges, const int number_of_nodes)
+  Graph(Edge **edges, int number_of_edges, int number_of_nodes)
     : edges_(edges), number_of_edges_(number_of_edges), number_of_nodes_(number_of_nodes) {};
 
   /**
@@ -37,18 +37,18 @@ class Graph {
     this->edges_ = nullptr;
   };
 
-  const int NumberOfEdges() const {
+  int NumberOfEdges() const {
     return this->number_of_edges_;
   };
 
-  const int NumberOfNodes() const {
+  int NumberOfNodes() const {
     return this->number_of_nodes_;
   };
 
  private:
-  const Edge *edges_;
-  const int number_of_edges_;
-  const int number_of_nodes_;
+  Edge **edges_;
+  int number_of_edges_;
+  int number_of_nodes_;
 };
 
 #endif // GRAPH_H_

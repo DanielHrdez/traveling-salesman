@@ -1,7 +1,7 @@
 /**
  * @file node.hpp
  * @author Daniel Hernandez de Leon (alu0101331720@ull.edu.es)
- * @brief Node class to represent a node object
+ * @brief Node struct to represent a node object
  * @version 0.1
  * @date 2022-04-01
  * 
@@ -17,7 +17,7 @@
  * 
  */
 struct Node {
-  char* name = "";
+  char name = '\0';
   bool visited = false;
 };
 

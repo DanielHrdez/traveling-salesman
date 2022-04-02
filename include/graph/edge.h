@@ -25,7 +25,11 @@ class Edge {
    *
    *
    */
-  Edge() {};
+  Edge() {
+    this->node_from_ = nullptr;
+    this->node_to_ = nullptr;
+    this->weight_ = 0;
+  };
 
   /**
    * @brief Construct a new Edge object
@@ -34,7 +38,7 @@ class Edge {
    * @param to Node to
    * @param weight Weight from node to node
    */
-  Edge(const Node *node_from, const Node *node_to, const int weight)
+  Edge(Node *node_from, Node *node_to, int weight)
     : node_from_(node_from), node_to_(node_to), weight_(weight) {};
 
   /**
@@ -60,7 +64,7 @@ class Edge {
    * 
    * @return Node* 
    */
-  const Node *NodeFrom() const {
+  Node *NodeFrom() const {
     return this->node_from_;
   };
 
@@ -69,14 +73,14 @@ class Edge {
    * 
    * @return Node* 
    */
-  const Node *NodeTo() const {
+  Node *NodeTo() const {
     return this->node_to_;
   };
 
  private:
-  const int weight_;
-  const Node *node_from_;
-  const Node *node_to_;
+  int weight_;
+  Node *node_from_;
+  Node *node_to_;
 };
 
 #endif // EDGE_H_
