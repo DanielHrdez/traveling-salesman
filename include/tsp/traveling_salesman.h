@@ -21,7 +21,7 @@ class TravelingSalesman {
    * 
    * @param graph Graph of the problem
    */
-  TravelingSalesman(const Graph graph) : graph_(graph) {};
+  TravelingSalesman(Graph graph) : graph_(graph) {};
 
   /**
    * @brief Destroy the Traveling Salesman object
@@ -34,10 +34,10 @@ class TravelingSalesman {
    * 
    * @return Edge* 
    */
-  virtual Edge *Solve() const = 0;
+  virtual std::vector<Edge> Solve() const = 0;
 
  protected:
-  const Graph graph_;
+  Graph graph_;
 };
 
 #endif // TRAVELING_SALESMAN_H_

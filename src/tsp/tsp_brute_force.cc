@@ -11,19 +11,35 @@
 
 #include "../../include/tsp/tsp_brute_force.h"
 
-Edge *TspBruteForce::Solve() const {
-  const int kIntMax = 2147483647;
-  const int kEdges = this->graph_.NumberOfEdges();
-  const int kNodes = this->graph_.NumberOfNodes();
-  Edge *aux_edges;
-  Edge *best_edges;
-  int best_distance = kIntMax;
-  for (int i = 0; i < kEdges; ++i) {
-    aux_edges = this->edges_ + i;
-    int distance = aux_edges->Distance();
-    if (distance < best_distance) {
-      best_distance = distance;
-      best_edges = aux_edges;
+std::vector<Edge> TspBruteForce::Solve() {
+  // const int kIntMax = 2147483647;
+  // const int kEdges = this->graph_.NumberOfEdges();
+  // const int kNodes = this->graph_.NumberOfNodes();
+  // std::vector<Edge> aux_edges;
+  // std::vector<Edge> best_edges;
+  // int best_distance = kIntMax;
+
+  // for (Edge egde : this->graph_.Edges()) {
+  //   edge.
+  // }
+}
+  
+std::vector<std::vector<Edge>> TspBruteForce::Permutacions(std::vector<Node *> nodes) {
+  const int kNumberOfPermutations = this->NumberOfPermutations(nodes.size());
+  std::vector<std::vector<Edge>> permutations;
+  nodes.push_back(nodes[0]);
+  for (int i = 0; i < kNumberOfPermutations; i++) {
+    std::vector<Edge> permutation;
+    for (int j = 0; j < nodes.size() - 1; j++) {
+      permutation.push_back(Edge(nodes[j], nodes[j + 1], this->graph_.Travel(nodes[j], nodes[j + 1])));
     }
+    permutations.push_back(permutation);
+
   }
+}
+
+int TspBruteForce::NumberOfPermutations(int number_of_nodes) {
+  if (number_of_nodes <= 1) return 1;
+  const int kNumberMinus1 = number_of_nodes - 1;
+  return kNumberMinus1 * NumberOfPermutations(kNumberMinus1);
 }

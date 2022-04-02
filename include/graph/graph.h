@@ -39,6 +39,16 @@ class Graph {
     nodes_.clear();
   };
 
+  int Travel(Node *from, Node *to) {
+    int distance = 0;
+    for (Edge edge : this->edges_) {
+      if (edge.NodeFrom() == from && edge.NodeTo() == to) {
+        return edge.Weight();
+      }
+    }
+    return -1;
+  };
+
   std::vector<Node *> Nodes() {
     return this->nodes_;
   };

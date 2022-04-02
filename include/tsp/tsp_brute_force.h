@@ -21,7 +21,7 @@ class TspBruteForce : public TravelingSalesman {
    * 
    * @param graph Graph of the problem
    */
-  TspBruteForce(const Graph graph) : TravelingSalesman(graph) {};
+  TspBruteForce(Graph graph) : TravelingSalesman(graph) {};
 
   /**
    * @brief Destroy the Brute Force object
@@ -34,7 +34,11 @@ class TspBruteForce : public TravelingSalesman {
    * 
    * @return Edge* 
    */
-  Edge *Solve() const override;
+  std::vector<Edge> Solve();
+
+  std::vector<std::vector<Edge>> Permutacions(std::vector<Node *> nodes);
+
+  int NumberOfPermutations(int number_of_nodes);
 };
 
 #endif // BRUTE_FORCE_H_
