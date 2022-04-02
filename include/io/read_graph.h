@@ -19,25 +19,12 @@
 class ReadGraph {
  public:
   /**
-   * @brief Construct a new Read Graph object
-   * 
-   */
-  ReadGraph() {};
-
-  /**
-   * @brief Destroy the Read Graph object
-   * 
-   */
-  ~ReadGraph() {};
-
-  /**
    * @brief Read the graph from file
    * 
-   * @return Graph* 
+   * @return Graph
    */
-  Graph Read(char *file_name);
+  Graph Read(char const*file_name);
 
- private:
   /**
    * @brief Calculate the number of edges of the graph
    * 
@@ -45,14 +32,14 @@ class ReadGraph {
    * @return int 
    */
   int NumberOfEdges(int number_of_nodes) {
-    if (number_of_nodes == 1) return 0;
+    if (number_of_nodes <= 1) return 0;
     const int kNodesMinusOne = number_of_nodes - 1;
     return kNodesMinusOne + NumberOfEdges(kNodesMinusOne);
   };
 
-  int NodeIn(char node_name, Node *nodes, int number_of_nodes) {
-    for (int i = 0; i < number_of_nodes; i++) {
-      if (nodes[i].name == node_name) return i;
+  int NodeIn(char node_name, std::vector<Node *> nodes) {
+    for (int i = 0; i < nodes.size(); i++) {
+      if (nodes[i]->name == node_name) return i;
     }
     return -1;
   };

@@ -13,6 +13,7 @@
 #define GRAPH_H_
 
 #include "edge.h"
+#include <vector>
 
 /**
  * @brief Graph class to represent a complete undirected graph object
@@ -26,29 +27,37 @@ class Graph {
    * @param edges Edges of the graph
    * @param size Size of the graph
    */
-  Graph(Edge **edges, int number_of_edges, int number_of_nodes)
-    : edges_(edges), number_of_edges_(number_of_edges), number_of_nodes_(number_of_nodes) {};
+  Graph(std::vector<Edge> edges, std::vector<Node *> nodes)
+    : edges_(edges), nodes_(nodes) {};
 
   /**
    * @brief Destroy the Graph object
    * 
    */
   ~Graph() {
-    this->edges_ = nullptr;
+    edges_.clear();
+    nodes_.clear();
+  };
+
+  std::vector<Node *> Nodes() {
+    return this->nodes_;
+  };
+
+  std::vector<Edge> Edges() {
+    return this->edges_;
   };
 
   int NumberOfEdges() const {
-    return this->number_of_edges_;
+    return this->edges_.size();
   };
 
   int NumberOfNodes() const {
-    return this->number_of_nodes_;
+    return this->nodes_.size();
   };
 
  private:
-  Edge **edges_;
-  int number_of_edges_;
-  int number_of_nodes_;
+  std::vector<Edge> edges_;
+  std::vector<Node *> nodes_;
 };
 
 #endif // GRAPH_H_
