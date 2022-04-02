@@ -12,30 +12,40 @@
 #include "../../include/tsp/tsp_brute_force.h"
 
 std::vector<Edge> TspBruteForce::Solve() {
-  // const int kIntMax = 2147483647;
-  // const int kEdges = this->graph_.NumberOfEdges();
-  // const int kNodes = this->graph_.NumberOfNodes();
-  // std::vector<Edge> aux_edges;
-  // std::vector<Edge> best_edges;
-  // int best_distance = kIntMax;
+  std::vector<Node *> nodes = this->graph_.Nodes();
+  const int kNumberOfNodes = nodes.size();
+  const int kNumberOfNodesMinus1 = kNumberOfNodes - 1;
+  const int kNumberOfPermutations = this->NumberOfPermutations(kNumberOfNodes);
+  std::vector<Edge> best_travel;
+  int best_distance = 2147483647;
+  int left_index = 1;
+  int cost_travel;
+  int current_distance;
 
-  // for (Edge egde : this->graph_.Edges()) {
-  //   edge.
-  // }
-}
-  
-std::vector<std::vector<Edge>> TspBruteForce::Permutacions(std::vector<Node *> nodes) {
-  const int kNumberOfPermutations = this->NumberOfPermutations(nodes.size());
-  std::vector<std::vector<Edge>> permutations;
   nodes.push_back(nodes[0]);
   for (int i = 0; i < kNumberOfPermutations; i++) {
-    std::vector<Edge> permutation;
-    for (int j = 0; j < nodes.size() - 1; j++) {
-      permutation.push_back(Edge(nodes[j], nodes[j + 1], this->graph_.Travel(nodes[j], nodes[j + 1])));
+    cost_travel = 0;
+    std::vector<Edge> travel;
+    for (int j = 0; j < kNumberOfNodesMinus1; j++) {
+      current_distance = this->graph_.Travel(nodes[j], nodes[j + 1]);
+      cost_travel += current_distance;
+      travel.push_back(Edge(nodes[j], nodes[j + 1], current_distance));
     }
-    permutations.push_back(permutation);
-
+    if (cost_travel < best_distance) {
+      best_distance = cost_travel;
+      best_travel = travel;
+    }
+    this->SwapNodes(nodes, left_index++, kNumberOfNodesMinus1);
+    if (left_index >= kNumberOfNodesMinus1) left_index = 1;
   }
+  
+  return best_travel;
+}
+
+void SwapNodes(std::vector<Node *> &nodes, int i, int j) {
+  Node *aux = nodes[i];
+  nodes[i] = nodes[j];
+  nodes[j] = aux;
 }
 
 int TspBruteForce::NumberOfPermutations(int number_of_nodes) {
