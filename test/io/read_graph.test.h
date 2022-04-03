@@ -54,7 +54,7 @@ void NodeIn() {
 void Read() {
   std::cout << "Read graph_1.txt" << std::endl;
   ReadGraph read_graph;
-  Graph graph = read_graph.Read("C:\\Users\\Danie\\Desktop\\traveling-salesman\\data\\graph_1.txt");
+  Graph graph = read_graph.Read("..\\data\\graph_1.txt");
   EXPECT_EQ(graph.NumberOfEdges(), 6);
   EXPECT_EQ(graph.NumberOfNodes(), 4);
   EXPECT_EQ(graph.Nodes()[0]->Id(), 'A');
@@ -79,11 +79,4 @@ void Read() {
   EXPECT_EQ(graph.Edges()[5].NodeFrom()->Id(), 'C');
   EXPECT_EQ(graph.Edges()[5].NodeTo()->Id(), 'D');
   EXPECT_EQ(graph.Edges()[5].Weight(), 5);
-}
-
-int main() {
-  BadInputFile();
-  NumberOfEdges();
-  NodeIn();
-  Read();
 }

@@ -25,11 +25,14 @@ std::pair<std::vector<Node *>, int> TspBruteForce::Solve() {
   for (int i = 0; i < kNumberOfPermutations; i++) {
     cost_travel = 0;
     std::vector<Node *> travel;
-    for (int j = 0; j < kNumberOfNodes; j++) {
+    for (int j = 0; j < kNumberOfNodesMinus1; j++) {
       current_distance = this->graph_.Travel(nodes[j], nodes[j + 1]);
       cost_travel += current_distance;
       travel.push_back(nodes[j]);
     }
+    travel.push_back(nodes[kNumberOfNodesMinus1]);
+    current_distance = this->graph_.Travel(nodes[kNumberOfNodesMinus1], nodes[0]);
+    cost_travel += current_distance;
     travel.push_back(nodes[0]);
     if (cost_travel < best_distance) {
       best_distance = cost_travel;

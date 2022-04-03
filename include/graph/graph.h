@@ -40,9 +40,13 @@ class Graph {
   };
 
   int Travel(Node *from, Node *to) {
+    if (from == to) {
+      return 0;
+    }
     int distance = 0;
     for (Edge edge : this->edges_) {
-      if (edge.NodeFrom() == from && edge.NodeTo() == to) {
+      if (edge.NodeFrom() == from && edge.NodeTo() == to ||
+          edge.NodeFrom() == to && edge.NodeTo() == from) {
         return edge.Weight();
       }
     }

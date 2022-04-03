@@ -27,8 +27,3 @@ void NodeOstream() {
   ss << *node;
   EXPECT_EQ(ss.str(), "a");
 }
-
-int main() {
-  NodeConstructor();
-  NodeOstream();
-}

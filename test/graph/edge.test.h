@@ -39,8 +39,3 @@ void ChangeNodes() {
   delete node_from;
   delete node_to;
 }
-
-int main() {
-  EdgeConstructor();
-  ChangeNodes();
-}

@@ -39,7 +39,7 @@ void SwapNodes() {
 }
 
 void Solve() {
-  std::cout << "Solve" << std::endl;
+  std::cout << "Brute Force Solve" << std::endl;
   std::vector<Node *> nodes = {
     new Node {'A'},
     new Node {'B'},
@@ -51,7 +51,7 @@ void Solve() {
     Edge {nodes[0], nodes[2], 10},
     Edge {nodes[0], nodes[3], 15},
     Edge {nodes[1], nodes[2], 10},
-    Edge {nodes[1], nodes[4], 45},
+    Edge {nodes[1], nodes[3], 45},
     Edge {nodes[2], nodes[3], 5},
   };
   Graph graph(edges, nodes);
@@ -71,10 +71,4 @@ void Solve() {
 
   EXPECT_DEEP_EQ(nodes_solution, expected_solution);
   EXPECT_EQ(cost_solution, expected_cost);
-}
-
-int main() {
-  NumberOfPermutations();
-  SwapNodes();
-  Solve();
 }

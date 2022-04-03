@@ -9,6 +9,8 @@
  * 
  */
 
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <string.h>
@@ -30,7 +32,7 @@ void EXPECT_DEEP_EQ(std::vector<T> actual, std::vector<T> expected) {
     return;
   }
   for (int i = 0; i < expected.size(); i++) {
-    EXPECT_EQ(*expected[i], *actual[i]);
+    EXPECT_EQ(*actual[i], *expected[i]);
   }
 }
 
