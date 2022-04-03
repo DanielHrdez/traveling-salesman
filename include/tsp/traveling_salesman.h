@@ -27,14 +27,16 @@ class TravelingSalesman {
    * @brief Destroy the Traveling Salesman object
    * 
    */
-  virtual ~TravelingSalesman() {};
+  virtual ~TravelingSalesman() {
+    this->graph_.~Graph();
+  };
 
   /**
    * @brief Solve the Traveling Salesman problem
    * 
-   * @return Edge* 
+   * @return std::pair<std::vector<Node *>, int>
    */
-  virtual std::vector<Edge> Solve() const = 0;
+  virtual std::pair<std::vector<Node *>, int> Solve() = 0;
 
  protected:
   Graph graph_;

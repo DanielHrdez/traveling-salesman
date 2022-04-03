@@ -27,7 +27,7 @@ class Graph {
    * @param edges Edges of the graph
    * @param size Size of the graph
    */
-  Graph(std::vector<Edge> edges, std::vector<Node *> nodes)
+  Graph(std::vector<Edge> edges = {}, std::vector<Node *> nodes = {})
     : edges_(edges), nodes_(nodes) {};
 
   /**

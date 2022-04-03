@@ -39,7 +39,7 @@ class ReadGraph {
 
   int NodeIn(char node_name, std::vector<Node *> nodes) {
     for (int i = 0; i < nodes.size(); i++) {
-      if (nodes[i]->name == node_name) return i;
+      if (nodes[i]->Id() == node_name) return i;
     }
     return -1;
   };

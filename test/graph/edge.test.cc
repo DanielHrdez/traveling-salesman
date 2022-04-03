@@ -13,6 +13,7 @@
 #include "../tester.h"
 
 void EdgeConstructor() {
+  std::cout << "EdgeConstructor" << std::endl;
   Node *node_from = new Node();
   Node *node_to = new Node();
   Edge edge(node_from, node_to, 1);
@@ -24,16 +25,17 @@ void EdgeConstructor() {
 }
 
 void ChangeNodes() {
+  std::cout << "ChangeNodes" << std::endl;
   Node *node_from = new Node();
   Node *node_to = new Node();
   Edge edge1(node_from, node_to, 1);
   Edge edge2(node_from, node_to, 1);
-  node_from->name = 'a';
-  node_to->name = 'b';
-  EXPECT_EQ(edge1.NodeFrom()->name, 'a');
-  EXPECT_EQ(edge1.NodeTo()->name, 'b');
-  EXPECT_EQ(edge2.NodeFrom()->name, 'a');
-  EXPECT_EQ(edge2.NodeTo()->name, 'b');
+  node_from->SetId('a');
+  node_to->SetId('b');
+  EXPECT_EQ(edge1.NodeFrom()->Id(), 'a');
+  EXPECT_EQ(edge1.NodeTo()->Id(), 'b');
+  EXPECT_EQ(edge2.NodeFrom()->Id(), 'a');
+  EXPECT_EQ(edge2.NodeTo()->Id(), 'b');
   delete node_from;
   delete node_to;
 }

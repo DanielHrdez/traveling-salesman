@@ -37,8 +37,7 @@ Graph ReadGraph::Read(char const*file_name) {
     file >> node_from >> node_to >> weight;
     pos_from = this->NodeIn(node_from, nodes);
     if (pos_from == -1) {
-      nodes[node_pos]->name = node_from;
-      nodes[node_pos]->visited = false;
+      nodes[node_pos]->SetId(node_from);
       from = nodes[node_pos];
       node_pos++;
     } else {
@@ -46,8 +45,7 @@ Graph ReadGraph::Read(char const*file_name) {
     }
     pos_to = this->NodeIn(node_to, nodes);
     if (pos_to == -1) {
-      nodes[node_pos]->name = node_to;
-      nodes[node_pos]->visited = false;
+      nodes[node_pos]->SetId(node_to);
       to = nodes[node_pos];
       node_pos++;
     } else {

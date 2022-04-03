@@ -21,20 +21,22 @@ class TspBruteForce : public TravelingSalesman {
    * 
    * @param graph Graph of the problem
    */
-  TspBruteForce(Graph graph) : TravelingSalesman(graph) {};
+  TspBruteForce(Graph graph = Graph()) : TravelingSalesman(graph) {};
 
   /**
    * @brief Destroy the Brute Force object
    * 
    */
-  ~TspBruteForce() {};
+  ~TspBruteForce() {
+    this->graph_.~Graph();
+  };
 
   /**
    * @brief Solve the Traveling Salesman problem by brute force
    * 
    * @return Edge* 
    */
-  std::vector<Edge> Solve();
+  std::pair<std::vector<Node *>, int> Solve();
 
   void SwapNodes(std::vector<Node *> &nodes, int i, int j);
 

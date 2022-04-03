@@ -11,26 +11,26 @@
 
 #include "../../include/tsp/tsp_brute_force.h"
 
-std::vector<Edge> TspBruteForce::Solve() {
+std::pair<std::vector<Node *>, int> TspBruteForce::Solve() {
   std::vector<Node *> nodes = this->graph_.Nodes();
   const int kNumberOfNodes = nodes.size();
   const int kNumberOfNodesMinus1 = kNumberOfNodes - 1;
   const int kNumberOfPermutations = this->NumberOfPermutations(kNumberOfNodes);
-  std::vector<Edge> best_travel;
+  std::vector<Node *> best_travel;
   int best_distance = 2147483647;
   int left_index = 1;
   int cost_travel;
   int current_distance;
 
-  nodes.push_back(nodes[0]);
   for (int i = 0; i < kNumberOfPermutations; i++) {
     cost_travel = 0;
-    std::vector<Edge> travel;
-    for (int j = 0; j < kNumberOfNodesMinus1; j++) {
+    std::vector<Node *> travel;
+    for (int j = 0; j < kNumberOfNodes; j++) {
       current_distance = this->graph_.Travel(nodes[j], nodes[j + 1]);
       cost_travel += current_distance;
-      travel.push_back(Edge(nodes[j], nodes[j + 1], current_distance));
+      travel.push_back(nodes[j]);
     }
+    travel.push_back(nodes[0]);
     if (cost_travel < best_distance) {
       best_distance = cost_travel;
       best_travel = travel;
@@ -39,10 +39,10 @@ std::vector<Edge> TspBruteForce::Solve() {
     if (left_index >= kNumberOfNodesMinus1) left_index = 1;
   }
   
-  return best_travel;
+  return { best_travel, best_distance };
 }
 
-void SwapNodes(std::vector<Node *> &nodes, int i, int j) {
+void TspBruteForce::SwapNodes(std::vector<Node *> &nodes, int i, int j) {
   Node *aux = nodes[i];
   nodes[i] = nodes[j];
   nodes[j] = aux;
