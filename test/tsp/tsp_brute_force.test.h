@@ -38,7 +38,7 @@ void SwapNodes() {
   EXPECT_EQ(nodes[2]->Id(), 'A');
 }
 
-void Solve() {
+void BruteSolve() {
   std::cout << "Brute Force Solve" << std::endl;
   std::vector<Node *> nodes = {
     new Node {'A'},

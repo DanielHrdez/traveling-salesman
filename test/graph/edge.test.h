@@ -14,12 +14,12 @@
 
 void EdgeConstructor() {
   std::cout << "EdgeConstructor" << std::endl;
-  Node *node_from = new Node();
-  Node *node_to = new Node();
+  Node *node_from = new Node('a');
+  Node *node_to = new Node('b');
   Edge edge(node_from, node_to, 1);
   EXPECT_EQ(edge.Weight(), 1);
-  EXPECT_EQ(edge.NodeFrom(), node_from);
-  EXPECT_EQ(edge.NodeTo(), node_to);
+  EXPECT_EQ(*edge.NodeFrom(), *node_from);
+  EXPECT_EQ(*edge.NodeTo(), *node_to);
   delete node_from;
   delete node_to;
 }

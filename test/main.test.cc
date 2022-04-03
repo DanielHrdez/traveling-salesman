@@ -14,7 +14,9 @@
 #include "graph/edge.test.h"
 
 #include "io/read_graph.test.h"
+
 #include "tsp/tsp_brute_force.test.h"
+#include "tsp/tsp_greedy.test.h"
 
 int main() {
   std::cout << "Running all test" << std::endl;
@@ -34,5 +36,9 @@ int main() {
 
   NumberOfPermutations();
   SwapNodes();
-  Solve();
+  BruteSolve();
+
+  GreedySolve();
+  
+  return 0;
 }
