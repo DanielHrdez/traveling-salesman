@@ -20,9 +20,10 @@
 class WriteGraph {
  public:
   /**
-   * @brief Read the graph from file
+   * @brief Write the graph to file
    * 
-   * @return Graph
+   * @param graph Graph to write
+   * @param file_name File name to write
    */
   void Write(Graph graph, std::string file_name);
 };

@@ -25,6 +25,7 @@ class ReadGraph {
    */
   Graph Read(char const*file_name);
 
+ private:
   /**
    * @brief Calculate the number of edges of the graph
    * 
@@ -37,6 +38,13 @@ class ReadGraph {
     return kNodesMinusOne + NumberOfEdges(kNodesMinusOne);
   };
 
+  /**
+   * @brief Check if the graph already contains a node
+   * 
+   * @param node_name The id of the node
+   * @param nodes The nodes of the graph
+   * @return int The index of the node in the nodes vector
+   */
   int NodeIn(char node_name, std::vector<Node *> nodes) {
     for (int i = 0; i < nodes.size(); i++) {
       if (nodes[i]->Id() == node_name) return i;

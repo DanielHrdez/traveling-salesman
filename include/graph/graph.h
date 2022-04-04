@@ -41,6 +41,13 @@ class Graph {
     this->edges_.clear();
   };
 
+  /**
+   * @brief Calculate the cost from a node to another
+   * 
+   * @param from Node from
+   * @param to Node to
+   * @return int Cost
+   */
   int Travel(Node *from, Node *to) {
     if (from == to) {
       return 0;
@@ -55,18 +62,38 @@ class Graph {
     return -1;
   };
 
+  /**
+   * @brief Return the nodes of the graph
+   * 
+   * @return std::vector<Node *> Nodes
+   */
   std::vector<Node *> Nodes() {
     return this->nodes_;
   };
 
+  /**
+   * @brief Return the edges of the graph
+   * 
+   * @return std::vector<Edge> Edges
+   */
   std::vector<Edge> Edges() {
     return this->edges_;
   };
 
+  /**
+   * @brief Return the number of edges of the graph
+   * 
+   * @return int Number of edges
+   */
   int NumberOfEdges() const {
     return this->edges_.size();
   };
 
+  /**
+   * @brief Return the number of nodes of the graph
+   * 
+   * @return int Number of nodes
+   */
   int NumberOfNodes() const {
     return this->nodes_.size();
   };

@@ -15,7 +15,7 @@
 #include "traveling_salesman.h"
 
 class TspDynamic : public TravelingSalesman {
-public:
+ public:
   /**
    * @brief Construct a new Tsp Dynamic object
    * 
@@ -24,12 +24,33 @@ public:
   TspDynamic(Graph graph = Graph()) : TravelingSalesman(graph) {};
 
   /**
-   * @brief Solve the Traveling Salesman problem by brute force
+   * @brief Solve the Traveling Salesman problem by dynamic programming
    * 
    * @return Edge* 
    */
   std::pair<std::vector<Node *>, int> Solve();
-  std::vector<std::vector<int>> Permutations(int size);
+
+ private:
+  /**
+   * @brief Solve the Traveling Salesman problem by dynamic programming
+   * 
+   * @param nodes Nodes of the graph
+   * @param current_position Current position of the salesman
+   * @param number_of_nodes Number of nodes of the graph
+   * @param count Number of nodes visited
+   * @param cost Cost of the path
+   * @param min_path Minimum cost of the path
+   * 
+   * @return std::pair<std::vector<Node *>, int> The solution and the minimum cost
+   */
+  std::pair<std::vector<Node *>, int> Solve(
+    std::vector<Node *> nodes,
+    int current_position,
+    int number_of_nodes,
+    int count,
+    int cost,
+    int &min_path
+  );
 };
 
 #endif // TSP_DYNAMIC_H_

@@ -11,49 +11,30 @@
 
 #include "../../include/tsp/tsp_brute_force.h"
 #include <climits>
+#include <algorithm>
 
 std::pair<std::vector<Node *>, int> TspBruteForce::Solve() {
   std::vector<Node *> nodes = this->graph_.Nodes();
-  const int kNumberOfNodes = nodes.size();
-  const int kNumberOfNodesMinus1 = kNumberOfNodes - 1;
-  const int kNumberOfPermutations = this->NumberOfPermutations(kNumberOfNodes);
-  std::vector<Node *> best_travel;
-  int best_distance = INT_MAX;
-  int left_index = 1;
-  int cost_travel;
-  int current_distance;
+  int min_path = INT_MAX;
+  Node *start = nodes[0];
+  std::vector<Node *> best_path;
+  nodes.erase(nodes.begin());
 
-  for (int i = 0; i < kNumberOfPermutations; i++) {
-    cost_travel = 0;
-    std::vector<Node *> travel;
-    for (int j = 0; j < kNumberOfNodesMinus1; j++) {
-      current_distance = this->graph_.Travel(nodes[j], nodes[j + 1]);
-      cost_travel += current_distance;
-      travel.push_back(nodes[j]);
+  do {
+    int path = 0;
+    Node *current = start;
+    for (Node *node : nodes) {
+      path += this->graph_.Travel(current, node);
+      current = node;
     }
-    travel.push_back(nodes[kNumberOfNodesMinus1]);
-    current_distance = this->graph_.Travel(nodes[kNumberOfNodesMinus1], nodes[0]);
-    cost_travel += current_distance;
-    travel.push_back(nodes[0]);
-    if (cost_travel < best_distance) {
-      best_distance = cost_travel;
-      best_travel = travel;
+    path += this->graph_.Travel(current, start);
+    if (path < min_path) {
+      min_path = path;
+      best_path.push_back(start);
+      best_path = nodes;
+      best_path.push_back(start);
     }
-    this->SwapNodes(nodes, left_index++, kNumberOfNodesMinus1);
-    if (left_index >= kNumberOfNodesMinus1) left_index = 1;
-  }
-  
-  return { best_travel, best_distance };
-}
+  } while (std::next_permutation(nodes.begin(), nodes.end()));
 
-void TspBruteForce::SwapNodes(std::vector<Node *> &nodes, int i, int j) {
-  Node *aux = nodes[i];
-  nodes[i] = nodes[j];
-  nodes[j] = aux;
-}
-
-int TspBruteForce::NumberOfPermutations(int number_of_nodes) {
-  if (number_of_nodes <= 1) return 1;
-  const int kNumberMinus1 = number_of_nodes - 1;
-  return kNumberMinus1 * NumberOfPermutations(kNumberMinus1);
+  return { best_path, min_path };
 }

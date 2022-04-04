@@ -29,10 +29,6 @@ class TspBruteForce : public TravelingSalesman {
    * @return Edge* 
    */
   std::pair<std::vector<Node *>, int> Solve();
-
-  void SwapNodes(std::vector<Node *> &nodes, int i, int j);
-
-  int NumberOfPermutations(int number_of_nodes);
 };
 
 #endif // TSP_BRUTE_FORCE_H_

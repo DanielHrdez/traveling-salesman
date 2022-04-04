@@ -16,10 +16,24 @@ int main(int argc, char *argv[]) {
   char *directory = argument_pair.first;
   int time_limit = argument_pair.second;
   PrintTitle();
-  std::vector<Graph> graphs = GenerateGraphs(DEFAULT_NUMBER_GRAPHS, directory);
-  AlgorithmSolutions solutions = ExecuteAlgorithms(graphs, time_limit);
-  std::cout << "xd" << std::endl;
-  // PrintTable(solutions);
+  AlgorithmSolutions solutions = MainLoop(directory, time_limit);
+  PrintTable(solutions);
+}
+
+AlgorithmSolutions MainLoop(char * directory, int time_limit) {
+  std::chrono::time_point<std::chrono::system_clock> start, end;
+  start = std::chrono::system_clock::now();
+  int number_of_nodes = 2;
+  AlgorithmSolutions solutions;
+
+  while (std::chrono::system_clock::now() - start < std::chrono::seconds(time_limit)) {
+    Graph graph = GenerateGraph(number_of_nodes, directory);
+    solutions.push_back(ExecuteAlgorithms(graph, start));
+    number_of_nodes++;
+  }
+  
+  std::cout << "\033[2K\rTerminated ✔" << std::endl;
+  return solutions;
 }
 
 std::pair<char *, int> CheckArguments(int number_of_arguments, char *arguments[]) {
@@ -40,92 +54,95 @@ std::pair<char *, int> CheckArguments(int number_of_arguments, char *arguments[]
 }
 
 void PrintTable(AlgorithmSolutions solutions) {
-  const char *bar = "| Instance | Brute Force | Time (ms) | Dynamic | Time (ms) | Greedy | Time (ms) |";
-  std::cout << bar << std::endl;
+  TextTable table;
+  table.add("Instance");
+  table.add("Brute Force");
+  table.add("Time (ms)");
+  table.add("Dynamic");
+  table.add("Time (ms)");
+  table.add("Greedy");
+  table.add("Time (ms)");
+  table.endOfRow();
   for (auto solution : solutions) {
     int number_of_nodes = std::get<0>(solution);
     std::tuple<int, int, int> solutions = std::get<1>(solution);
     std::vector<std::chrono::duration<double>> time_result = std::get<2>(solution);
-    std::cout << "| " << number_of_nodes << "_nodos.txt ";
-    std::cout << "| " << std::get<0>(solutions) << " ";
-    std::cout << "| " << time_result[0].count() << " ";
-    std::cout << "| " << std::get<1>(solutions) << " ";
-    std::cout << "| " << time_result[1].count() << " ";
-    std::cout << "| " << std::get<2>(solutions) << " ";
-    std::cout << "| " << time_result[2].count() << " |" << std::endl;
+    table.add(std::to_string(number_of_nodes) + "_nodos.txt");
+    table.add(std::to_string(std::get<0>(solutions)));
+    table.add(std::to_string(time_result[0].count()));
+    table.add(std::to_string(std::get<1>(solutions)));
+    table.add(std::to_string(time_result[1].count()));
+    table.add(std::to_string(std::get<2>(solutions)));
+    table.add(std::to_string(time_result[2].count()));
+    table.endOfRow();
   }
+  table.setAlignment(2, TextTable::Alignment::RIGHT);
+  std::cout << table;
 }
 
-AlgorithmSolutions ExecuteAlgorithms(std::vector<Graph> graphs, int time_limit) {
-  AlgorithmSolutions solutions;
+Solution ExecuteAlgorithms(Graph graph, std::chrono::time_point<std::chrono::system_clock> start_time) {
   std::vector<std::chrono::duration<double>> time_results;
   TspBruteForce brute_force;
   TspDynamic dynamic;
   TspGreedy greedy;
+  std::chrono::time_point<std::chrono::system_clock> start, end;
+  int time_passed;
 
-  for (Graph graph : graphs) {
-    std::chrono::time_point<std::chrono::system_clock> start, end;
+  std::cout << "\rBrute force algorithm - " << graph.NumberOfNodes() << " nodes... " << std::flush;
+  brute_force.SetGraph(graph);
+  start = std::chrono::system_clock::now();
+  std::pair<std::vector<Node *>, int> brute_force_solution = brute_force.Solve();
+  end = std::chrono::system_clock::now();
+  std::chrono::duration<double> elapsed_seconds = end - start;
+  time_results.push_back(elapsed_seconds);
+  time_passed = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - start_time).count();
+  std::cout << "\t" << time_passed << " seconds" << std::flush;
 
-    brute_force.SetGraph(graph);
-    start = std::chrono::system_clock::now();
-    std::pair<std::vector<Node *>, int> brute_force_solution = brute_force.Solve();
-    end = std::chrono::system_clock::now();
-    std::chrono::duration<double> elapsed_seconds = end - start;
-    time_results.push_back(elapsed_seconds);
+  std::cout << "\rDynamic algorithm - " << graph.NumberOfNodes() << " nodes...    " << std::flush;
+  dynamic.SetGraph(graph);
+  start = std::chrono::system_clock::now();
+  std::pair<std::vector<Node *>, int> dynamic_solution = dynamic.Solve();
+  end = std::chrono::system_clock::now();
+  elapsed_seconds = end - start;
+  time_results.push_back(elapsed_seconds);
+  time_passed = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - start_time).count();
+  std::cout << "\t" << time_passed << " seconds" << std::flush;
 
-    dynamic.SetGraph(graph);
-    start = std::chrono::system_clock::now();
-    std::pair<std::vector<Node *>, int> dynamic_solution = dynamic.Solve();
-    end = std::chrono::system_clock::now();
-    elapsed_seconds = end - start;
-    time_results.push_back(elapsed_seconds);
+  std::cout << "\rGreedy algorithm - " << graph.NumberOfNodes() << " nodes...     " << std::flush;
+  greedy.SetGraph(graph);
+  start = std::chrono::system_clock::now();
+  std::pair<std::vector<Node *>, int> greedy_solution = greedy.Solve();
+  end = std::chrono::system_clock::now();
+  elapsed_seconds = end - start;
+  time_results.push_back(elapsed_seconds);
+  time_passed = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - start_time).count();
+  std::cout << "\t" << time_passed << " seconds" << std::flush;
 
-    greedy.SetGraph(graph);
-    start = std::chrono::system_clock::now();
-    std::pair<std::vector<Node *>, int> greedy_solution = greedy.Solve();
-    end = std::chrono::system_clock::now();
-    elapsed_seconds = end - start;
-    time_results.push_back(elapsed_seconds);
-
-    solutions.push_back({
-      (int) graph.Nodes().size(),
-      {
-        brute_force_solution.second,
-        dynamic_solution.second,
-        greedy_solution.second
-      },
-      time_results
-    });
-    time_results.clear();
-  }
-
-  return solutions;
+  return {
+    (int) graph.Nodes().size(),
+    {
+      brute_force_solution.second,
+      dynamic_solution.second,
+      greedy_solution.second
+    },
+    time_results
+  };
 }
 
 void PrintTitle() {
   #ifdef _WIN32
   SetConsoleOutputCP(CP_UTF8);
-  HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-  SetConsoleTextAttribute(hConsole, 11);
-  std::cout << TITLE << std::endl;
-  SetConsoleTextAttribute(hConsole, 15);
-  #else
-  std::cout << "\033[1;31m" << TITLE << "\033[0m" << std::endl;
   #endif
+  std::cout << "\033[1;36m" << TITLE << "\033[0m" << std::endl;
 }
 
-std::vector<Graph> GenerateGraphs(int number_of_graphs, char *directory) {
-  std::vector<Graph> graphs;
-  std::vector<Node *> nodes;
-  std::vector<Edge> edges;
+Graph GenerateGraph(int number_of_nodes, char *directory) {
   RandomGraph generator;
   WriteGraph writer;
 
-  for (int i = 1; i < number_of_graphs; i++) {
-    graphs.push_back(generator.Generate(i + 1));
-    std::string filename = DEFAULT_FOLDER + std::to_string(i + 1) + "_nodos.txt";
-    writer.Write(graphs.back(), filename);
-  }
+  Graph graph = generator.Generate(number_of_nodes);
+  std::string filename = DEFAULT_FOLDER + std::to_string(number_of_nodes) + "_nodos.txt";
+  writer.Write(graph, filename);
 
-  return graphs;
+  return graph;
 }

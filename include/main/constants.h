@@ -23,7 +23,7 @@ const char *TITLE = R"(
 
 const int DEFAULT_TIME_LIMIT = 5 * 60;
 
-const int DEFAULT_NUMBER_GRAPHS = 10;
+const int DEFAULT_NUMBER_GRAPHS = 5;
 
 const char *DEFAULT_FOLDER = "./data/";
 

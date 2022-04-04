@@ -1,7 +1,7 @@
 4
-A B 30
-A C 72
-A D 44
-B C 78
-B D 23
-C D 9
+A B 69
+A C 24
+A D 78
+B C 58
+B D 62
+C D 64

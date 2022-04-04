@@ -13,5 +13,10 @@
 
 class RandomGraph {
  public:
+  /**
+   * @brief Construct a new Random Graph:: Random Graph object
+   * 
+   * @param number_of_nodes Number of nodes of the graph
+   */
   Graph Generate(int number_of_nodes);
 };
