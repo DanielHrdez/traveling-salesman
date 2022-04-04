@@ -12,32 +12,6 @@
 #include "../../include/tsp/tsp_brute_force.h"
 #include "../tester.h"
 
-void NumberOfPermutations() {
-  std::cout << "NumberOfPermutations" << std::endl;
-  TspBruteForce tsp_brute_force;
-  EXPECT_EQ(tsp_brute_force.NumberOfPermutations(-1), 1);
-  EXPECT_EQ(tsp_brute_force.NumberOfPermutations(0), 1);
-  EXPECT_EQ(tsp_brute_force.NumberOfPermutations(1), 1);
-  EXPECT_EQ(tsp_brute_force.NumberOfPermutations(2), 1);
-  EXPECT_EQ(tsp_brute_force.NumberOfPermutations(3), 2);
-  EXPECT_EQ(tsp_brute_force.NumberOfPermutations(4), 6);
-  EXPECT_EQ(tsp_brute_force.NumberOfPermutations(5), 24);
-}
-
-void SwapNodes() {
-  std::cout << "SwapNodes" << std::endl;
-  TspBruteForce tsp_brute_force;
-  std::vector<Node *> nodes = {
-    new Node {'A'},
-    new Node {'B'},
-    new Node {'C'},
-  };
-  tsp_brute_force.SwapNodes(nodes, 0, 2);
-  EXPECT_EQ(nodes[0]->Id(), 'C');
-  EXPECT_EQ(nodes[1]->Id(), 'B');
-  EXPECT_EQ(nodes[2]->Id(), 'A');
-}
-
 void BruteSolve() {
   std::cout << "Brute Force Solve" << std::endl;
   std::vector<Node *> nodes = {

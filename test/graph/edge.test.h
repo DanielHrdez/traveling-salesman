@@ -30,8 +30,8 @@ void ChangeNodes() {
   Node *node_to = new Node();
   Edge edge1(node_from, node_to, 1);
   Edge edge2(node_from, node_to, 1);
-  node_from->SetId('a');
-  node_to->SetId('b');
+  node_from->Id('a');
+  node_to->Id('b');
   EXPECT_EQ(edge1.NodeFrom()->Id(), 'a');
   EXPECT_EQ(edge1.NodeTo()->Id(), 'b');
   EXPECT_EQ(edge2.NodeFrom()->Id(), 'a');

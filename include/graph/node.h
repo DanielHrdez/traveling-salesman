@@ -33,16 +33,20 @@ class Node {
     return visited_;
   }
 
-  void SetId(char id) {
+  void Id(char id) {
     id_ = id;
   }
 
-  void SetVisited(bool visited) {
+  void Visited(bool visited) {
     visited_ = visited;
   }
 
   inline bool operator==(const Node &node) const {
     return id_ == node.id_;
+  }
+
+  inline bool operator!=(const Node &node) const {
+    return id_ != node.id_;
   }
 
   inline friend std::ostream &operator<<(std::ostream &os, const Node &node) {

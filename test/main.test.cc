@@ -17,6 +17,9 @@
 
 #include "tsp/tsp_brute_force.test.h"
 #include "tsp/tsp_greedy.test.h"
+#include "tsp/tsp_dynamic.test.h"
+
+#include <chrono>
 
 int main() {
   std::cout << "Running all test" << std::endl;
@@ -34,11 +37,12 @@ int main() {
   NodeIn();
   Read();
 
-  NumberOfPermutations();
-  SwapNodes();
   BruteSolve();
 
   GreedySolve();
+
+  DynamicSolve();
+  Permutations();
   
   return 0;
 }

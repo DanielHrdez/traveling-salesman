@@ -1,7 +1,7 @@
 /**
- * @file tsp_brute_force.h
+ * @file tsp_greedy.h
  * @author Daniel Hernandez de Leon (alu0101331720@ull.edu.es)
- * @brief Brute Force class to represent a Tsp Brute Force object
+ * @brief Greedy class to represent a Tsp Greedy object
  * @version 0.1
  * @date 2022-04-01
  * 
@@ -9,19 +9,19 @@
  * 
  */
 
-#ifndef TSP_BRUTE_FORCE_H_
-#define TSP_BRUTE_FORCE_H_
+#ifndef TSP_GREEDY_H_
+#define TSP_GREEDY_H_
 
 #include "traveling_salesman.h"
 
-class TspBruteForce : public TravelingSalesman {
+class TspGreedy : public TravelingSalesman {
  public:
   /**
    * @brief Construct a new Tsp Brute Force object
    * 
    * @param graph Graph of the problem
    */
-  TspBruteForce(Graph graph = Graph()) : TravelingSalesman(graph) {};
+  TspGreedy(Graph graph = Graph()) : TravelingSalesman(graph) {};
 
   /**
    * @brief Solve the Traveling Salesman problem by brute force
@@ -29,10 +29,6 @@ class TspBruteForce : public TravelingSalesman {
    * @return Edge* 
    */
   std::pair<std::vector<Node *>, int> Solve();
-
-  void SwapNodes(std::vector<Node *> &nodes, int i, int j);
-
-  int NumberOfPermutations(int number_of_nodes);
 };
 
-#endif // TSP_BRUTE_FORCE_H_
+#endif // TSP_GREEDY_H_

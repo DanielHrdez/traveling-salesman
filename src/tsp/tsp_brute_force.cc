@@ -10,6 +10,7 @@
  */
 
 #include "../../include/tsp/tsp_brute_force.h"
+#include <climits>
 
 std::pair<std::vector<Node *>, int> TspBruteForce::Solve() {
   std::vector<Node *> nodes = this->graph_.Nodes();
@@ -17,7 +18,7 @@ std::pair<std::vector<Node *>, int> TspBruteForce::Solve() {
   const int kNumberOfNodesMinus1 = kNumberOfNodes - 1;
   const int kNumberOfPermutations = this->NumberOfPermutations(kNumberOfNodes);
   std::vector<Node *> best_travel;
-  int best_distance = 2147483647;
+  int best_distance = INT_MAX;
   int left_index = 1;
   int cost_travel;
   int current_distance;
