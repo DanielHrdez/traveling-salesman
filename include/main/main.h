@@ -9,6 +9,10 @@
  * 
  */
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
+
 #include "../graph/random_graph.h"
 #include "../io/read_graph.h"
 #include "../io/write_graph.h"
@@ -20,7 +24,6 @@
 
 #include <iostream>
 #include <chrono>
-#include <Windows.h>
 #include <tuple>
 #include <string>
 

@@ -13,6 +13,7 @@
 #define WRITE_GRAPH_H_
 
 #include <fstream>
+#include <string>
 
 #include "../graph/graph.h"
 
@@ -23,7 +24,7 @@ class WriteGraph {
    * 
    * @return Graph
    */
-  void Write(Graph graph, char const*file_name);
+  void Write(Graph graph, std::string file_name);
 };
 
 #endif // WRITE_GRAPH_H_

@@ -31,6 +31,10 @@ class TravelingSalesman {
     this->graph_.~Graph();
   };
 
+  void SetGraph(Graph graph) {
+    this->graph_ = graph;
+  };
+
   /**
    * @brief Solve the Traveling Salesman problem
    * 

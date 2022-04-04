@@ -1,7 +1,7 @@
 4
-A B 25
-A C 10
-A D 15
-B C 10
-B D 45
-C D 5
+A B 30
+A C 72
+A D 44
+B C 78
+B D 23
+C D 9

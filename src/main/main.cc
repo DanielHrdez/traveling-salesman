@@ -13,11 +13,12 @@
 
 int main(int argc, char *argv[]) {
   std::pair<char *, int> argument_pair = CheckArguments(argc, argv);
-  char * directory = argument_pair.first;
+  char *directory = argument_pair.first;
   int time_limit = argument_pair.second;
   PrintTitle();
   std::vector<Graph> graphs = GenerateGraphs(DEFAULT_NUMBER_GRAPHS, directory);
-  // AlgorithmSolutions solutions = ExecuteAlgorithms(graphs, time_limit);
+  AlgorithmSolutions solutions = ExecuteAlgorithms(graphs, time_limit);
+  std::cout << "xddd" << std::endl;
   // PrintTable(solutions);
 }
 
@@ -31,7 +32,7 @@ std::pair<char *, int> CheckArguments(int number_of_arguments, char *arguments[]
   std::pair<char *, int> arguments_pair;
   arguments_pair.first = arguments[1];
   if (number_of_arguments == 4) {
-    arguments_pair.second = (int) arguments[3];
+    arguments_pair.second = atoi(arguments[3]);
   } else {
     arguments_pair.second = DEFAULT_TIME_LIMIT;
   }
@@ -58,25 +59,28 @@ void PrintTable(AlgorithmSolutions solutions) {
 AlgorithmSolutions ExecuteAlgorithms(std::vector<Graph> graphs, int time_limit) {
   AlgorithmSolutions solutions;
   std::vector<std::chrono::duration<double>> time_results;
+  TspBruteForce brute_force;
+  TspDynamic dynamic;
+  TspGreedy greedy;
 
   for (Graph graph : graphs) {
     std::chrono::time_point<std::chrono::system_clock> start, end;
 
-    TspBruteForce brute_force(graph);
+    brute_force.SetGraph(graph);
     start = std::chrono::system_clock::now();
     std::pair<std::vector<Node *>, int> brute_force_solution = brute_force.Solve();
     end = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsed_seconds = end - start;
     time_results.push_back(elapsed_seconds);
 
-    TspDynamic dynamic(graph);
+    dynamic.SetGraph(graph);
     start = std::chrono::system_clock::now();
     std::pair<std::vector<Node *>, int> dynamic_solution = dynamic.Solve();
     end = std::chrono::system_clock::now();
     elapsed_seconds = end - start;
     time_results.push_back(elapsed_seconds);
 
-    TspGreedy greedy(graph);
+    greedy.SetGraph(graph);
     start = std::chrono::system_clock::now();
     std::pair<std::vector<Node *>, int> greedy_solution = greedy.Solve();
     end = std::chrono::system_clock::now();
@@ -92,17 +96,22 @@ AlgorithmSolutions ExecuteAlgorithms(std::vector<Graph> graphs, int time_limit) 
       },
       time_results
     });
+    time_results.clear();
   }
-
+  std::cout << "xddd" << std::endl;
   return solutions;
 }
 
 void PrintTitle() {
+  #ifdef _WIN32
   SetConsoleOutputCP(CP_UTF8);
   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
   SetConsoleTextAttribute(hConsole, 11);
   std::cout << TITLE << std::endl;
   SetConsoleTextAttribute(hConsole, 15);
+  #else
+  std::cout << "\033[1;31m" << TITLE << "\033[0m" << std::endl;
+  #endif
 }
 
 std::vector<Graph> GenerateGraphs(int number_of_graphs, char *directory) {

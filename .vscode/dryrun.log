@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/roxanababa/Desktop/CLASE/2_CUATRI/traveling-salesman'
+g++ --std=c++20 src/**/*.cc -o bin/tsp.exe
+bin/tsp.exe data
+make: Leaving directory `/Users/roxanababa/Desktop/CLASE/2_CUATRI/traveling-salesman'
+ 

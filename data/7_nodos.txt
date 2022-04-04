@@ -1,0 +1,22 @@
+7
+A B 33
+A C 79
+A D 49
+A E 79
+A F 21
+A G 67
+B C 72
+B D 93
+B E 36
+B F 85
+B G 45
+C D 28
+C E 91
+C F 94
+C G 57
+D E 1
+D F 53
+D G 8
+E F 44
+E G 68
+F G 90

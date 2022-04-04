@@ -1,5 +1,5 @@
 make:
-	g++ src/**/*.cc -o bin/tsp.exe
+	g++ --std=c++20 src/**/*.cc -o bin/tsp.exe
 	bin/tsp.exe data
 
 run-test:
