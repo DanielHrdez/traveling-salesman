@@ -46,8 +46,8 @@ class Edge {
    * 
    */
   ~Edge() {
-    delete this->node_from_;
-    delete this->node_to_;
+    this->node_from_ = nullptr;
+    this->node_to_ = nullptr;
   };
 
   /**

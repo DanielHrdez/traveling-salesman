@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
   PrintTitle();
   std::vector<Graph> graphs = GenerateGraphs(DEFAULT_NUMBER_GRAPHS, directory);
   AlgorithmSolutions solutions = ExecuteAlgorithms(graphs, time_limit);
-  std::cout << "xddd" << std::endl;
+  std::cout << "xd" << std::endl;
   // PrintTable(solutions);
 }
 
@@ -98,7 +98,7 @@ AlgorithmSolutions ExecuteAlgorithms(std::vector<Graph> graphs, int time_limit) 
     });
     time_results.clear();
   }
-  std::cout << "xddd" << std::endl;
+
   return solutions;
 }
 

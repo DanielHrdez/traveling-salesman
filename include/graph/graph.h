@@ -35,10 +35,10 @@ class Graph {
    * 
    */
   ~Graph() {
-    this->edges_.clear();
-    for (auto node : nodes_) {
-      delete node;
+    for (int i = 0; i < this->nodes_.size(); i++) {
+      this->nodes_[i] = nullptr;
     }
+    this->edges_.clear();
   };
 
   int Travel(Node *from, Node *to) {
