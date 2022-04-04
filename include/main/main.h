@@ -22,6 +22,7 @@
 #include <chrono>
 #include <Windows.h>
 #include <tuple>
+#include <string>
 
 using AlgorithmSolutions = std::vector<std::tuple<int, std::tuple<int, int, int>, std::vector<std::chrono::duration<double>>>>;
 

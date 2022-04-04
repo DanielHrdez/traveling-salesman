@@ -11,9 +11,8 @@
 
 #include "../../include/io/write_graph.h"
 
-void WriteGraph::Write(Graph graph, char const*file_name) {
-  std::ofstream file;
-  file.open(file_name);
+void WriteGraph::Write(Graph graph, std::string file_name) {
+  std::ofstream file(file_name);
   file << graph.NumberOfNodes() << std::endl;
   for (int i = 0; i < graph.NumberOfNodes(); i++) {
     for (int j = i + 1; j < graph.NumberOfNodes(); j++) {

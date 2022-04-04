@@ -114,7 +114,8 @@ std::vector<Graph> GenerateGraphs(int number_of_graphs, char *directory) {
 
   for (int i = 1; i < number_of_graphs; i++) {
     graphs.push_back(generator.Generate(i + 1));
-    writer.Write(graphs.back(), (char *) i);
+    std::string filename = DEFAULT_FOLDER + std::to_string(i + 1) + "_nodos.txt";
+    writer.Write(graphs.back(), filename);
   }
 
   return graphs;

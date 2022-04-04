@@ -25,4 +25,6 @@ const int DEFAULT_TIME_LIMIT = 5 * 60;
 
 const int DEFAULT_NUMBER_GRAPHS = 10;
 
+const char *DEFAULT_FOLDER = "./data/";
+
 #endif // CONSTANTS_H_
