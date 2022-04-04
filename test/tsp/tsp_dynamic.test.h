@@ -46,35 +46,3 @@ void DynamicSolve() {
   EXPECT_DEEP_EQ(nodes_solution, expected_solution);
   EXPECT_EQ(cost_solution, expected_cost);
 }
-
-void Permutations() {
-  std::cout << "Permutations" << std::endl;
-  std::vector<Node *> nodes = {
-    new Node {'A'},
-    new Node {'B'},
-    new Node {'C'},
-    new Node {'D'},
-  };
-  std::vector<Edge> edges = {
-    Edge {nodes[0], nodes[1], 25},
-    Edge {nodes[0], nodes[2], 10},
-    Edge {nodes[0], nodes[3], 15},
-    Edge {nodes[1], nodes[2], 10},
-    Edge {nodes[1], nodes[3], 45},
-    Edge {nodes[2], nodes[3], 5},
-  };
-  Graph graph(edges, nodes);
-  TspDynamic tsp_dynamic(graph);
-
-  std::vector<std::vector<int>> permutations = tsp_dynamic.Permutations(4);
-  std::vector<std::vector<int>> expected_permutations = {
-    {0, 1, 2, 3},
-    {0, 1, 3, 2},
-    {0, 2, 1, 3},
-    {0, 2, 3, 1},
-    {0, 3, 1, 2},
-    {0, 3, 2, 1},
-  };
-
-  EXPECT_DEEP_EQ(permutations, expected_permutations);
-}

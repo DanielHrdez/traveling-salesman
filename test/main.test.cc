@@ -12,6 +12,7 @@
 #include "graph/graph.test.h"
 #include "graph/node.test.h"
 #include "graph/edge.test.h"
+#include "graph/random_graph.test.h"
 
 #include "io/read_graph.test.h"
 
@@ -24,13 +25,15 @@
 int main() {
   std::cout << "Running all test" << std::endl;
 
-  EdgeConstructor();
-  ChangeNodes();
-
   Travel();
 
   NodeConstructor();
   NodeOstream();
+
+  EdgeConstructor();
+  ChangeNodes();
+
+  Generate();
 
   BadInputFile();
   NumberOfEdges();
@@ -42,7 +45,6 @@ int main() {
   GreedySolve();
 
   DynamicSolve();
-  Permutations();
   
   return 0;
 }

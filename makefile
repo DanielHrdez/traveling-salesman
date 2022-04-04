@@ -1,7 +1,7 @@
 make:
 	g++ src/**/*.cc -o bin/tsp.exe
-	bin/tsp.exe
+	bin/tsp.exe data
 
 run-test:
-	g++ -o test/test.exe test/main.test.cc src/**/*.cc
-	test/test.exe
+	g++ -o bin/test.exe test/main.test.cc src/**/*.cc
+	bin/test.exe

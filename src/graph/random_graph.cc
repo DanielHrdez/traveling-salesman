@@ -14,14 +14,17 @@
 Graph RandomGraph::Generate(int number_of_nodes) {
   std::vector<Node *> nodes;
   std::vector<Edge> edges;
-  for (int i = 0; i < number_of_nodes; i++) {
+  const int kMaxChar = number_of_nodes + 'A';
+
+  for (char i = 'A'; i < kMaxChar; i++) {
     nodes.push_back(new Node(i));
   }
-  for (int i = 0; i < number_of_nodes; i++) {
+  for (int i = 0; i < number_of_nodes - 1; i++) {
     for (int j = i + 1; j < number_of_nodes; j++) {
       int weight = rand() % 100;
       edges.push_back(Edge(nodes[i], nodes[j], weight));
     }
   }
+  
   return Graph(edges, nodes);
 }

@@ -24,5 +24,8 @@ struct pair_hash {
 };
 
 std::pair<std::vector<Node *>, int> TspDynamic::Solve() {
-  
+  return std::pair<std::vector<Node *>, int>(
+    std::vector<Node *>(),
+    0
+  );
 }

@@ -11,11 +11,31 @@
 
 #include "../../include/main/main.h"
 
-int main() {
+int main(int argc, char *argv[]) {
+  std::pair<char *, int> argument_pair = CheckArguments(argc, argv);
+  char * directory = argument_pair.first;
+  int time_limit = argument_pair.second;
   PrintTitle();
-  std::vector<Graph> graphs = GenerateGraphs(10);
-  AlgorithmSolutions solutions = ExecuteAlgorithms(graphs);
-  PrintTable(solutions);
+  std::vector<Graph> graphs = GenerateGraphs(DEFAULT_NUMBER_GRAPHS, directory);
+  // AlgorithmSolutions solutions = ExecuteAlgorithms(graphs, time_limit);
+  // PrintTable(solutions);
+}
+
+std::pair<char *, int> CheckArguments(int number_of_arguments, char *arguments[]) {
+  if (number_of_arguments < 2) {
+    std::cout << "Error: Invalid number of arguments" << std::endl;
+    std::cout << "Usage: tsp <directory>" << std::endl;
+    std::cout << "Optional: -t <time limit in seconds>" << std::endl;
+    exit(EXIT_FAILURE);
+  }
+  std::pair<char *, int> arguments_pair;
+  arguments_pair.first = arguments[1];
+  if (number_of_arguments == 4) {
+    arguments_pair.second = (int) arguments[3];
+  } else {
+    arguments_pair.second = DEFAULT_TIME_LIMIT;
+  }
+  return arguments_pair;
 }
 
 void PrintTable(AlgorithmSolutions solutions) {
@@ -25,7 +45,6 @@ void PrintTable(AlgorithmSolutions solutions) {
     int number_of_nodes = std::get<0>(solution);
     std::tuple<int, int, int> solutions = std::get<1>(solution);
     std::vector<std::chrono::duration<double>> time_result = std::get<2>(solution);
-
     std::cout << "| " << number_of_nodes << "_nodos.txt ";
     std::cout << "| " << std::get<0>(solutions) << " ";
     std::cout << "| " << time_result[0].count() << " ";
@@ -36,7 +55,7 @@ void PrintTable(AlgorithmSolutions solutions) {
   }
 }
 
-AlgorithmSolutions ExecuteAlgorithms(std::vector<Graph> graphs) {
+AlgorithmSolutions ExecuteAlgorithms(std::vector<Graph> graphs, int time_limit) {
   AlgorithmSolutions solutions;
   std::vector<std::chrono::duration<double>> time_results;
 
@@ -82,25 +101,20 @@ void PrintTitle() {
   SetConsoleOutputCP(CP_UTF8);
   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
   SetConsoleTextAttribute(hConsole, 11);
-  std::cout << kTitle << std::endl;
+  std::cout << TITLE << std::endl;
   SetConsoleTextAttribute(hConsole, 15);
 }
 
-std::vector<Graph> GenerateGraphs(int number_of_graphs) {
+std::vector<Graph> GenerateGraphs(int number_of_graphs, char *directory) {
   std::vector<Graph> graphs;
   std::vector<Node *> nodes;
   std::vector<Edge> edges;
+  RandomGraph generator;
+  WriteGraph writer;
 
-  for (int i = 1; i <= number_of_graphs; i++) {
-    for (int j = 0; j < i; j++) {
-      nodes.push_back(new Node((char)j));
-    }
-    for (int j = 0; j < i; j++) {
-      for (int k = j + 1; k < i; k++) {
-        edges.push_back(Edge(nodes[j], nodes[k], rand() % 100));
-      }
-    }
-    graphs.push_back(Graph(edges, nodes));
+  for (int i = 1; i < number_of_graphs; i++) {
+    graphs.push_back(generator.Generate(i + 1));
+    writer.Write(graphs.back(), (char *) i);
   }
 
   return graphs;

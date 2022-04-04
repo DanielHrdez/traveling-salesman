@@ -9,8 +9,9 @@
  * 
  */
 
-#include "../graph/graph.h"
+#include "../graph/random_graph.h"
 #include "../io/read_graph.h"
+#include "../io/write_graph.h"
 #include "../tsp/tsp_brute_force.h"
 #include "../tsp/tsp_greedy.h"
 #include "../tsp/tsp_dynamic.h"
@@ -24,7 +25,8 @@
 
 using AlgorithmSolutions = std::vector<std::tuple<int, std::tuple<int, int, int>, std::vector<std::chrono::duration<double>>>>;
 
+std::pair<char *, int> CheckArguments(int number_of_arguments, char *arguments[]);
 void PrintTitle();
-std::vector<Graph> GenerateGraphs(int number_of_graphs);
-AlgorithmSolutions ExecuteAlgorithms(std::vector<Graph> graphs);
+std::vector<Graph> GenerateGraphs(int number_of_graphs, char *directory);
+AlgorithmSolutions ExecuteAlgorithms(std::vector<Graph> graphs, int time_limit);
 void PrintTable(AlgorithmSolutions solutions);

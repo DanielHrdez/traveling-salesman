@@ -52,9 +52,9 @@ void NodeIn() {
 }
 
 void Read() {
-  std::cout << "Read graph_1.txt" << std::endl;
+  std::cout << "Read 4_nodos.txt" << std::endl;
   ReadGraph read_graph;
-  Graph graph = read_graph.Read("..\\data\\graph_1.txt");
+  Graph graph = read_graph.Read("data\\4_nodos.txt");
   EXPECT_EQ(graph.NumberOfEdges(), 6);
   EXPECT_EQ(graph.NumberOfNodes(), 4);
   EXPECT_EQ(graph.Nodes()[0]->Id(), 'A');
