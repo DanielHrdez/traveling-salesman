@@ -94,7 +94,8 @@ AlgorithmSolution ExecuteBruteForce(Graph graph, std::chrono::time_point<std::ch
   time_result = elapsed_seconds;
   time_passed = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - start_time).count();
   std::cout << "\t" << time_passed << " seconds" << std::flush;
-
+  
+  SetNodes(graph);
   return {brute_force_solution.second, time_result};
 }
 
@@ -113,6 +114,7 @@ AlgorithmSolution ExecuteDynamic(Graph graph, std::chrono::time_point<std::chron
   time_passed = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - start_time).count();
   std::cout << "\t" << time_passed << " seconds" << std::flush;
 
+  SetNodes(graph);
   return {dynamic_solution.second, time_result};
 }
 
@@ -130,7 +132,8 @@ AlgorithmSolution ExecuteGreedy(Graph graph, std::chrono::time_point<std::chrono
   time_result = elapsed_seconds;
   time_passed = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - start_time).count();
   std::cout << "\t" << time_passed << " seconds" << std::flush;
-
+  
+  SetNodes(graph);
   return {greedy_solution.second, time_result};
 }
 
@@ -152,6 +155,12 @@ Solution ExecuteAlgorithms(Graph graph, std::chrono::time_point<std::chrono::sys
       greedy_solution.second
     }
   };
+}
+
+void SetNodes(Graph graph) {
+  for (auto node : graph.Nodes()) {
+    node->Visited(false);
+  }
 }
 
 void PrintTitle() {

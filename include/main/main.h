@@ -106,3 +106,10 @@ void PrintTable(AlgorithmSolutions solutions);
  * @return AlgorithmSolutions The solutions of the algorithms
  */
 AlgorithmSolutions MainLoop(char *, int);
+
+/**
+ * @brief Set the Nodes object to false visited
+ * 
+ * @param graph The graph to set the nodes
+ */
+void SetNodes(Graph graph);
