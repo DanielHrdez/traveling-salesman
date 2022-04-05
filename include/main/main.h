@@ -28,8 +28,10 @@
 #include <tuple>
 #include <string>
 
-using Solution = std::tuple<int, std::tuple<int, int, int>, std::vector<std::chrono::duration<double>>>;
-using AlgorithmSolutions = std::vector<std::tuple<int, std::tuple<int, int, int>, std::vector<std::chrono::duration<double>>>>;
+using TupleChronos = std::tuple<std::chrono::duration<double>, std::chrono::duration<double>, std::chrono::duration<double>>;
+using Solution = std::tuple<int, std::tuple<int, int, int>, TupleChronos>;
+using AlgorithmSolution = std::pair<int, std::chrono::duration<double>>;
+using AlgorithmSolutions = std::vector<Solution>;
 
 /**
  * @brief Check if the argmuents are correct
@@ -63,6 +65,33 @@ Graph GenerateGraph(int number_of_nodes, char *directory);
  * @return Solution The solutions of the algorithms
  */
 Solution ExecuteAlgorithms(Graph graph, std::chrono::time_point<std::chrono::system_clock> start_time);
+
+/**
+ * @brief Execute the brute force algorithm and return the solution
+ * 
+ * @param graph The graph to execute the algorithm
+ * @param start_time The start time of the program
+ * @return AlgorithmSolution The solution of the algorithm
+ */
+AlgorithmSolution ExecuteBruteForce(Graph graph, std::chrono::time_point<std::chrono::system_clock> start_time);
+
+/**
+ * @brief Execute the dynamic algorithm and return the solution
+ * 
+ * @param graph The graph to execute the algorithm
+ * @param start_time The start time of the program
+ * @return AlgorithmSolution The solution of the algorithm
+ */
+AlgorithmSolution ExecuteDynamic(Graph graph, std::chrono::time_point<std::chrono::system_clock> start_time);
+
+/**
+ * @brief Execute the greedy algorithm and return the solution
+ * 
+ * @param graph The graph to execute the algorithm
+ * @param start_time The start time of the program
+ * @return AlgorithmSolution The solution of the algorithm
+ */
+AlgorithmSolution ExecuteGreedy(Graph graph, std::chrono::time_point<std::chrono::system_clock> start_time);
 
 /**
  * @brief Print the results of the algorithms

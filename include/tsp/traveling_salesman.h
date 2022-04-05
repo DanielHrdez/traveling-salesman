@@ -32,15 +32,6 @@ class TravelingSalesman {
   };
 
   /**
-   * @brief Set a new graph for the problem
-   * 
-   * @param graph New graph
-   */
-  void SetGraph(Graph graph) {
-    this->graph_ = graph;
-  };
-
-  /**
    * @brief Solve the Traveling Salesman problem
    * 
    * @return std::pair<std::vector<Node *>, int>
